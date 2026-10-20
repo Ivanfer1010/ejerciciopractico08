@@ -1,43 +1,41 @@
 // Ivan Gualotuña
-
 package main
-
-import (
+import( 
 	"fmt"
 )
-
-// Ejercicio 1 · Array de números primos
-func ejercicioArrayPrimos() {
-	primos := [5]int{2, 3, 5, 7, 11}
-	fmt.Println("Primer valor: ", primos [0], "Centro: ", primos [2], "Ultimo: ", primos[4], "Cantidad", len(primos))
+//Capa UIDE 
+//Reto 1: Inscribir estadisticas y jugadores
+type Estadisticas struct {
+	Kills int
+	Muertes int
+	Asistencias int
 }
-// Ejercicio 2 · Array de muestras y promedio
-func ejercicioArrayPromedio() {
-	muestras := [3]float64{71.8, 56.2, 89.5}
-	suma := 0.0
-	for _, m := range muestras {
-		suma += m
+type Jugador struct{
+	Nick string
+	Equipo string
+	Stats Estadisticas
+	Activo bool
+}
+//Ejericio 2
+func registrar (j *jugador, kills, muertes, asistencias int){
+	j.Stats.Kills = Kills
+	j.Stats.Muertes = muertes
+	j.Stats.Asistencias = asistencias
+}
+func kda(e Estadisticas)float64 {
+	muertes := e.Muertes
+	if muertes == 0 {
+		muertes = 1
 	}
-	fmt.Printf("Promedio: %.2f\n", suma/float64(len(muestras)) )
+	return float64 (e.kills.Asistencias) / float64 (muertes)
 }
-// Ejercicio 3 · Slices y cortes
-func ejercicioArrayPrimoSlice() {
-	primos := []int{2, 3, 5}
-	primos = append(primos, 7, 11)
-	fmt.Println("Primos", primos, "Corte", primos [1:4])
-}
-func ejercicioMap() {
-	votos := []string{"Amber", "Brian", "Amber", "Brian", "Amber"}
-	conteo := make(map[string]int)
-	for _, v := range votos {
-		conteo[v]++
+//Ejercicio 3 (Aqui se devuelve una copia)
+func mvp (roster []Jugador) Jugador {
+	var mejor Jugador
+	for_, j := range roster {
+		if j.Activo && kda(j.Stats) > kda (mejor.Stats){
+			mejor = j
+		}
 	}
-
-	fmt.Println("Votos", conteo)
+	return mejor
 }
-func main() {
-	ejercicioArrayPrimos()
-	ejercicioArrayPromedio()
-	ejercicioArrayPrimoSlice()
-	ejercicioMap()
-	}
